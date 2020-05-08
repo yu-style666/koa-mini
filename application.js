@@ -17,6 +17,14 @@ const compose = (middlewares) => {
   };
 };
 
+// 构造一个 Context 的类
+class Context {
+  constructor(req, res) {
+    this.req = req;
+    this.res = res;
+  }
+}
+
 class Application {
   constructor() {
     this.middlewares = [];
@@ -33,7 +41,7 @@ class Application {
   };
 
   callback = async (req, res) => {
-    const ctx = this;
+    const ctx = new Context(req, res);
 
     // 异常处理
     try {
